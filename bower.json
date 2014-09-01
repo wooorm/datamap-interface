@@ -1,0 +1,28 @@
+{
+  "name": "datamap-interface",
+  "main": "index.js",
+  "description": "Simple interface for a map functioning as a database",
+  "license": "MIT",
+  "authors": [
+    "Titus Wormer <tituswormer@gmail.com>"
+  ],
+  "keywords": [
+    "data",
+    "word",
+    "map"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wooorm/datamap-interface.git"
+  },
+  "ignore": [
+    ".*",
+    "*.log",
+    "*.md",
+    "component.json",
+    "package.json",
+    "coverage",
+    "node_modules",
+    "spec"
+  ]
+}

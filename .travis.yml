@@ -1,0 +1,15 @@
+language: node_js
+before_install:
+- npm update -g npm
+script: npm run-script test-travis
+node_js:
+- '0.10'
+- '0.11'
+after_script: npm install coveralls@2.10.0 && cat ./coverage/lcov.info | coveralls
+deploy:
+  provider: npm
+  email: tituswormer@gmail.com
+  api_key:
+    secure: ClDFKAPjQIkn8tpuIEnnLnkOyvKsGnKpx0hDgbTY4j59qNTT7JrMu/zRSWZoBS4Nfsgv5hmNHD0dDkAneFlIXlZuhZeJVckBR8ij2zmLe472VjlSCQeJ5Bz+yLDSKHcafgxz35XNIi/5HXAWBpKEDxiINdL14fiTDd1oPSKcRPw=
+  on:
+    repo: wooorm/datamap-interface
