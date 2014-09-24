@@ -23,88 +23,101 @@ $ bower install datamap-interface
 
 ```js
 var DatamapInterface = require('datamap-interface'),
-    mammals;
+    animals;
 
-mammals = new DatamapInterface([
-    'common vampire bat',
-    'virginia opossum',
-    'eastern grey kangaroo',
-    'tasmanian devil',
-    'human',
-    'northern elephant seal',
-    'fox squirrel',
-    'tree pangolin',
-    'african elephant',
-    'platypus',
-    'colugo',
-    'reindeer',
-    'humpback whale',
-    'star-nosed mole',
-    'giant panda',
-    'giant armadillo',
-    'plains zebra',
-    'black and rufous elephant shrew'
-]);
+animals = new DatamapInterface({
+    'shark' : 'fish',
+    'tuna' : 'fish',
+    'colugo' : 'mammal',
+    'human' : 'mammal'
+});
 
-mammals.is('human'); // true
-mammals.is('unicorn'); // false
+animals.get('human'); // 'mammal'
+animals.get('unicorn'); // null
 
-mammals.add('unicorn');
-mammals.is('unicorn'); // true
+animals.add('unicorn', 'mammal');
+animals.get('unicorn'); // 'mammal'
 
-mammals.remove('unicorn');
-mammals.is('unicorn'); // false
+animals.remove('unicorn');
+animals.has('unicorn'); // false
 ```
 
 ## API
 
 ### DatamapInterface(values)
 
-**datamap-interface** exports a constructor, which can be passed an array.
+**datamap-interface** exports a constructor, which can be passed an object.
 
 ```js
 var DatamapInterface = require('datamap-interface'),
     fish;
 
-fish = new DatamapInterface(['shark', 'tuna']);
+animals = new DatamapInterface({
+    'unicorn' : 'mystical creature',
+    'shark' : 'fish',
+    'tuna' : 'fish',
+    'colugo' : 'mammal',
+    'human' : 'mammal'
+});
 ```
 
 The following functions are available on the instance:
 
-### DatamapInterface#is(word)
+### DatamapInterface#has(key)
 
 ```js
-fish.is('shark'); // true
-fish.is('human'); // false
+animals.has('unicorn'); // true
+animals.has('rainbow'); // false
 ```
 
-Returns whether (true) or not (false) a given word is a filler word.
+Returns whether (`true`) or not (`false`) a `key` is in the map.
 
-### DatamapInterface#add(word...)
+### DatamapInterface#get(key)
 
 ```js
-fish.add('giant grouper', 'red lionfish');
+animals.get('unicorn'); // 'mystical creature'
+animals.get('rainbow'); // null
 ```
 
-Adds all arguments to the internal database.
-Given values are **NOT** validated.
+Gets the value for `key` in map, or `null`.
 
-### DatamapInterface#remove(word...)
+### DatamapInterface#add(key, value)
 
 ```js
-fish.remove('giant grouper', 'reindeer');
+animals.add('giant grouper', 'fish');
+
+animals.add({
+    'dragon' : 'mystical creature'
+});
 ```
 
-Removes all arguments from the internal database.
+Either adds the key/value pair to the map, or every key/value pair in the first argument.
+
+### DatamapInterface#remove(keys)
+
+```js
+animals.remove(['giant grouper', 'human']);
+animals.remove('dragon');
+```
+
+Removes `keys` or every key in `keys`.
+
 Given values are **NOT** validated; no error is thrown when non-existent values are removed.
 
 ### DatamapInterface#all()
 
 ```js
-fish.all(); // ['shark', 'tuna', 'red lionfish']
+animals.all();
+/* {
+ *    'shark' : 'fish',
+ *    'tuna' : 'fish',
+ *    'colugo' : 'mammal',
+ *    'unicorn' : 'mystical creature'
+ * }
+ */
 ```
 
-Return the values (as an Array) in the internal database.
+Return the values (as an Object) in the internal database.
 
 ## License
 
