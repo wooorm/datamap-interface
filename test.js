@@ -2,7 +2,7 @@
 
 var DatamapInterface, assert, animals;
 
-DatamapInterface = require('..');
+DatamapInterface = require('./');
 assert = require('assert');
 
 animals = new DatamapInterface({
