@@ -196,13 +196,10 @@ var datamapInterfacePrototype;
 datamapInterfacePrototype = DatamapInterface.prototype;
 
 datamapInterfacePrototype.add = add;
-
 datamapInterfacePrototype.remove = remove;
-
 datamapInterfacePrototype.all = all;
-
+datamapInterfacePrototype.valueOf = all;
 datamapInterfacePrototype.get = get;
-
 datamapInterfacePrototype.has = datamapHas;
 
 /**
