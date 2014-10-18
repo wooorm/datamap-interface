@@ -1,6 +1,6 @@
 # datamap-interface [![Build Status](https://travis-ci.org/wooorm/datamap-interface.svg?branch=master)](https://travis-ci.org/wooorm/datamap-interface) [![Coverage Status](https://img.shields.io/coveralls/wooorm/datamap-interface.svg)](https://coveralls.io/r/wooorm/datamap-interface?branch=master)
 
-A simple interface for a map functioning as a database.
+A simple interface for a map.
 
 ## Installation
 
@@ -22,10 +22,9 @@ $ bower install datamap-interface
 ## Usage
 
 ```js
-var DatamapInterface = require('datamap-interface'),
-    animals;
+var DatamapInterface = require('datamap-interface');
 
-animals = new DatamapInterface({
+var animals = new DatamapInterface({
     'shark' : 'fish',
     'tuna' : 'fish',
     'colugo' : 'mammal',
@@ -35,11 +34,9 @@ animals = new DatamapInterface({
 animals.get('human'); // 'mammal'
 animals.get('unicorn'); // null
 
-animals.add('unicorn', 'mammal');
-animals.get('unicorn'); // 'mammal'
+animals.add('unicorn', 'mammal').get('unicorn'); // 'mammal'
 
-animals.remove('unicorn');
-animals.has('unicorn'); // false
+animals.remove('unicorn').has('unicorn'); // false
 ```
 
 ## API
@@ -49,10 +46,9 @@ animals.has('unicorn'); // false
 **datamap-interface** exports a constructor, which can be passed an object.
 
 ```js
-var DatamapInterface = require('datamap-interface'),
-    fish;
+var DatamapInterface = require('datamap-interface');
 
-animals = new DatamapInterface({
+var animals = new DatamapInterface({
     'unicorn' : 'mystical creature',
     'shark' : 'fish',
     'tuna' : 'fish',
@@ -60,8 +56,6 @@ animals = new DatamapInterface({
     'human' : 'mammal'
 });
 ```
-
-The following functions are available on the instance:
 
 ### DatamapInterface#has(key)
 
@@ -79,9 +73,9 @@ animals.get('unicorn'); // 'mystical creature'
 animals.get('rainbow'); // null
 ```
 
-Gets the value for `key` in map, or `null`.
+Get the value for `key` in map, or `null`.
 
-### DatamapInterface#add(key, value)
+### DatamapInterface#add()
 
 ```js
 animals.add('giant grouper', 'fish');
@@ -91,7 +85,10 @@ animals.add({
 });
 ```
 
-Either adds the key/value pair to the map, or every key/value pair in the first argument.
+- `DatamapInterface#add(key, value)`: Add `value` as `key` to map;
+- `DatamapInterface#add(values)`: Add every item in `values` to map.
+
+Returns self.
 
 ### DatamapInterface#remove(keys)
 
@@ -100,15 +97,29 @@ animals.remove(['giant grouper', 'human']);
 animals.remove('dragon');
 ```
 
-Removes `keys` or every key in `keys`.
+- `DatamapInterface#remove(key)`: Remove `key` from map;
+- `DatamapInterface#remove(keys)`: Remove every key in `keys` from map.
 
-Given values are **NOT** validated; no error is thrown when non-existent values are removed.
+Returns self. No error is thrown when non-existent values are removed.
+
+### DatamapInterface#keys()
+
+```js
+animals.keys(); // ['shark', 'tuna', 'colugo', 'unicorn']
+```
+
+Return the map as an `Object`.
+
 
 ### DatamapInterface#all()
 
+> Alias: `DatamapInterface#valueOf()`
+> Alias: `DatamapInterface#toJSON()`
+
 ```js
 animals.all();
-/* {
+/**
+ * {
  *    'shark' : 'fish',
  *    'tuna' : 'fish',
  *    'colugo' : 'mammal',
@@ -117,7 +128,7 @@ animals.all();
  */
 ```
 
-Return the values (as an Object) in the internal database.
+Return the map as an `Object`.
 
 ## License
 
