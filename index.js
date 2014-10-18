@@ -108,11 +108,17 @@ function removeAll(object, keys) {
  */
 
 function add(values, value) {
+    var self;
+
+    self = this;
+
     if (value) {
-        this.map[values] = value;
+        self.map[values] = value;
     } else {
-        addAll(this.map, values);
+        addAll(self.map, values);
     }
+
+    return self;
 }
 
 /**
@@ -127,11 +133,17 @@ function add(values, value) {
  */
 
 function remove(values) {
+    var self;
+
+    self = this;
+
     if (typeof values === 'string') {
-        this.map[values] = undefined;
+        self.map[values] = undefined;
     } else {
-        removeAll(this.map, values);
+        removeAll(self.map, values);
     }
+
+    return self;
 }
 
 /**
