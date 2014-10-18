@@ -80,6 +80,31 @@ describe('DatamapInterface#all()', function () {
     });
 });
 
+describe('DatamapInterface#keys()', function () {
+    var keys;
+
+    keys = animals.keys();
+
+    it('should return an array', function () {
+        assert(Array.isArray(keys));
+    });
+
+    it('should return all key in the datamap', function () {
+        assert(keys[0] === 'shark');
+        assert(keys[1] === 'tuna');
+        assert(keys[2] === 'colugo');
+        assert(keys[3] === 'human');
+        assert(keys.length === 4);
+    });
+
+    it('should be immutable', function () {
+        keys.push('unicorn');
+
+        assert(!animals.has('unicorn'));
+        assert(animals.keys().indexOf('unicorn') === -1);
+    });
+});
+
 describe('DatamapInterface#add() and DatamapInterface#remove()', function () {
     it('should add and remove an item', function () {
         assert(!animals.has('unicorn'));

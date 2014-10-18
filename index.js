@@ -164,6 +164,28 @@ function all() {
 }
 
 /**
+ * Get all keys.
+ *
+ * @this DatamapInterface
+ * @return {Array.<string>}
+ */
+
+function getKeys() {
+    var result,
+        index;
+
+    result = [];
+
+    index = -1;
+
+    forPropertyInObject(this.map, function (value, key) {
+        result[++index] = key;
+    });
+
+    return result;
+}
+
+/**
  * Get a value.
  *
  * @this DatamapInterface
@@ -202,6 +224,7 @@ datamapInterfacePrototype.valueOf = all;
 datamapInterfacePrototype.toJSON = all;
 datamapInterfacePrototype.get = get;
 datamapInterfacePrototype.has = datamapHas;
+datamapInterfacePrototype.keys = getKeys;
 
 /**
  * Expose `DatamapInterface`.
