@@ -199,6 +199,7 @@ datamapInterfacePrototype.add = add;
 datamapInterfacePrototype.remove = remove;
 datamapInterfacePrototype.all = all;
 datamapInterfacePrototype.valueOf = all;
+datamapInterfacePrototype.toJSON = all;
 datamapInterfacePrototype.get = get;
 datamapInterfacePrototype.has = datamapHas;
 
