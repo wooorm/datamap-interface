@@ -1,9 +1,20 @@
 'use strict';
 
-var DatamapInterface, assert, animals;
+/**
+ * Dependencies.
+ */
+
+var DatamapInterface,
+    assert;
 
 DatamapInterface = require('./');
 assert = require('assert');
+
+/**
+ * Data.
+ */
+
+var animals;
 
 animals = new DatamapInterface({
     'shark' : 'fish',
@@ -12,7 +23,7 @@ animals = new DatamapInterface({
     'human' : 'mammal'
 });
 
-describe('DatamapInterface#get(property)', function () {
+describe('DatamapInterface#get(key)', function () {
     it('should return the value of an item in the database', function () {
         assert(animals.get('shark') === 'fish');
     });
@@ -22,10 +33,10 @@ describe('DatamapInterface#get(property)', function () {
     });
 });
 
-describe('DatamapInterface#has(property)', function () {
+describe('DatamapInterface#has(key)', function () {
     it('should return if an item is in the database', function () {
-        assert(animals.has('shark'));
-        assert(!animals.has('unicorn'));
+        assert(animals.has('shark') === true);
+        assert(animals.has('unicorn') === false);
     });
 
     it('should not fail on prototpe extending', function () {
@@ -46,7 +57,9 @@ describe('DatamapInterface#has(property)', function () {
 });
 
 describe('DatamapInterface#all()', function () {
-    var all = animals.all();
+    var all;
+
+    all = animals.all();
 
     it('should return an object', function () {
         assert(typeof all === 'object');
@@ -72,9 +85,11 @@ describe('DatamapInterface#add() and DatamapInterface#remove()', function () {
         assert(!animals.has('unicorn'));
 
         animals.add('unicorn', 'mammal');
+
         assert(animals.has('unicorn'));
 
         animals.remove('unicorn');
+
         assert(!animals.has('unicorn'));
     });
 
@@ -86,23 +101,27 @@ describe('DatamapInterface#add() and DatamapInterface#remove()', function () {
             'unicorn' : 'mammal',
             'doge' : 'mammal'
         });
+
         assert(animals.has('unicorn'));
         assert(animals.has('doge'));
 
         animals.remove(['unicorn', 'doge']);
+
         assert(!animals.has('unicorn'));
         assert(!animals.has('doge'));
     });
 
     it('should fail silently when removing a non-existing item',
         function () {
-            assert(!animals.has('unicorn'));
+            assert(animals.has('unicorn') === false);
+
             animals.remove('unicorn');
-            assert(!animals.has('unicorn'));
+
+            assert(animals.has('unicorn') === false);
         }
     );
 
-    it('should not fail on prototpe extending (add)', function () {
+    it('should not fail on prototpe extending', function () {
         /* eslint-disable no-extend-native */
         Object.prototype.platypus = 'mammal';
 
