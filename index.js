@@ -224,6 +224,7 @@ datamapInterfacePrototype.valueOf = all;
 datamapInterfacePrototype.toJSON = all;
 datamapInterfacePrototype.get = get;
 datamapInterfacePrototype.has = datamapHas;
+datamapInterfacePrototype.is = datamapHas;
 datamapInterfacePrototype.keys = getKeys;
 
 /**

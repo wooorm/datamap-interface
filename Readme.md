@@ -59,6 +59,8 @@ var animals = new DatamapInterface({
 
 ### DatamapInterface#has(key)
 
+> Alias: `DatamapInterface#is()`
+
 ```js
 animals.has('unicorn'); // true
 animals.has('rainbow'); // false
@@ -113,8 +115,7 @@ Return the map as an `Object`.
 
 ### DatamapInterface#all()
 
-> Alias: `DatamapInterface#valueOf()`
-> Alias: `DatamapInterface#toJSON()`
+> Alias: `DatamapInterface#valueOf()`, `DatamapInterface#toJSON()`
 
 ```js
 animals.all();
