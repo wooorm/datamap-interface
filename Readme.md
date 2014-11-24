@@ -14,7 +14,7 @@ Component.js:
 $ component install wooorm/datamap-interface
 ```
 
-Component.js:
+Bower:
 ```sh
 $ bower install datamap-interface
 ```
