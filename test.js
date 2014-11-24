@@ -17,10 +17,10 @@ assert = require('assert');
 var animals;
 
 animals = new DatamapInterface({
-    'shark' : 'fish',
-    'tuna' : 'fish',
-    'colugo' : 'mammal',
-    'human' : 'mammal'
+    'shark': 'fish',
+    'tuna': 'fish',
+    'colugo': 'mammal',
+    'human': 'mammal'
 });
 
 describe('DatamapInterface#get(key)', function () {
@@ -123,8 +123,8 @@ describe('DatamapInterface#add() and DatamapInterface#remove()', function () {
         assert(!animals.has('doge'));
 
         animals.add({
-            'unicorn' : 'mammal',
-            'doge' : 'mammal'
+            'unicorn': 'mammal',
+            'doge': 'mammal'
         });
 
         assert(animals.has('unicorn'));
@@ -151,7 +151,7 @@ describe('DatamapInterface#add() and DatamapInterface#remove()', function () {
         Object.prototype.platypus = 'mammal';
 
         animals.add({
-            'unicorn' : 'mammal'
+            'unicorn': 'mammal'
         });
 
         assert(!animals.has('platypus'));
