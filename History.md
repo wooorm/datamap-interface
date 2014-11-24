@@ -1,4 +1,17 @@
 
+n.n.n / 2014-11-24
+==================
+
+ * Add `is()` alias for `has()`
+ * Add link to personal website to copyright in `Readme.md`
+ * Fix typo in `Readme.md`
+ * Add flat badges to `Readme.md`
+ * Refactor npm script targets in `package.json`
+ * Add `.eslintrc`
+ * Fix incorrect executive rights on `test.js`
+ * Refactor to disallow spaces after object keys
+ * Update eslint, mocha
+
 0.2.0 / 2014-10-18
 ==================
 
