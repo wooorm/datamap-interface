@@ -1,4 +1,4 @@
-# datamap-interface [![Build Status](https://travis-ci.org/wooorm/datamap-interface.svg?branch=master)](https://travis-ci.org/wooorm/datamap-interface) [![Coverage Status](https://img.shields.io/coveralls/wooorm/datamap-interface.svg)](https://coveralls.io/r/wooorm/datamap-interface?branch=master)
+# datamap-interface [![Build Status](https://img.shields.io/travis/wooorm/datamap-interface.svg?style=flat)](https://travis-ci.org/wooorm/datamap-interface) [![Coverage Status](https://img.shields.io/coveralls/wooorm/datamap-interface.svg?style=flat)](https://coveralls.io/r/wooorm/datamap-interface?branch=master)
 
 A simple interface for a map.
 
