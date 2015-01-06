@@ -22,6 +22,12 @@ $ component install wooorm/datamap-interface
 $ bower install datamap-interface
 ```
 
+[Duo](http://duojs.org/#getting-started):
+
+```javascript
+var DatamapInterface = require('wooorm/datamap-interface');
+```
+
 ## Usage
 
 ```js
