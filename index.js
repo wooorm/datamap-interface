@@ -1,6 +1,6 @@
 'use strict';
 
-/**
+/*
  * Cache.
  */
 
@@ -14,7 +14,6 @@ isOwnProperty = Object.prototype.hasOwnProperty;
  * @constructor
  * @param {Object.<string, *>} values
  */
-
 function DatamapInterface(values) {
     this.map = {};
 
@@ -28,7 +27,6 @@ function DatamapInterface(values) {
  * @param {string} key
  * @return {boolean}
  */
-
 function has(object, key) {
     return isOwnProperty.call(object, key) && object[key] !== undefined;
 }
@@ -39,7 +37,6 @@ function has(object, key) {
  * @param {Object.<string, *>} object
  * @param {function(string, *)} callback
  */
-
 function forPropertyInObject(object, callback) {
     var key;
 
@@ -56,7 +53,6 @@ function forPropertyInObject(object, callback) {
  * @param {Array.<*>} array
  * @param {function(*, number)} callback
  */
-
 function forValueInArray(array, callback) {
     var index,
         length;
@@ -75,7 +71,6 @@ function forValueInArray(array, callback) {
  * @param {Object.<string, *>} object
  * @param {Object.<string, *>} values
  */
-
 function addAll(object, values) {
     forPropertyInObject(values, function (value, key) {
         object[key] = value;
@@ -88,7 +83,6 @@ function addAll(object, values) {
  * @param {Object.<string, *>} object
  * @param {Array.<string>} keys
  */
-
 function removeAll(object, keys) {
     forValueInArray(keys, function (key) {
         object[key] = undefined;
@@ -106,7 +100,6 @@ function removeAll(object, keys) {
  * @param {Object.<string, *>|string} values
  * @param {*} value
  */
-
 function add(values, value) {
     var self;
 
@@ -131,16 +124,15 @@ function add(values, value) {
  * @this DatamapInterface
  * @param {Array.<string>|string} keys
  */
-
-function remove(values) {
+function remove(keys) {
     var self;
 
     self = this;
 
-    if (typeof values === 'string') {
-        self.map[values] = undefined;
+    if (typeof keys === 'string') {
+        self.map[keys] = undefined;
     } else {
-        removeAll(self.map, values);
+        removeAll(self.map, keys);
     }
 
     return self;
@@ -152,7 +144,6 @@ function remove(values) {
  * @this DatamapInterface
  * @return {Object.<string, *>}
  */
-
 function all() {
     var values;
 
@@ -169,7 +160,6 @@ function all() {
  * @this DatamapInterface
  * @return {Array.<string>}
  */
-
 function getKeys() {
     var result,
         index;
@@ -192,7 +182,6 @@ function getKeys() {
  * @param {string} key
  * @return {*}
  */
-
 function get(key) {
     return has(this.map, key) ? this.map[key] : null;
 }
@@ -201,15 +190,14 @@ function get(key) {
  * Whether or not `value` is in context.
  *
  * @this DatamapInterface
- * @param {*} value
+ * @param {string} key
  * @return {boolean}
  */
-
 function datamapHas(key) {
     return has(this.map, key);
 }
 
-/**
+/*
  * Expose methods on prototype.
  */
 
@@ -227,7 +215,7 @@ datamapInterfacePrototype.has = datamapHas;
 datamapInterfacePrototype.is = datamapHas;
 datamapInterfacePrototype.keys = getKeys;
 
-/**
+/*
  * Expose `DatamapInterface`.
  */
 

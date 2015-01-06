@@ -1,6 +1,6 @@
 'use strict';
 
-/**
+/*
  * Dependencies.
  */
 
@@ -10,7 +10,7 @@ var DatamapInterface,
 DatamapInterface = require('./');
 assert = require('assert');
 
-/**
+/*
  * Data.
  */
 
