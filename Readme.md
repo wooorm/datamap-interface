@@ -4,18 +4,21 @@ A simple interface for a map.
 
 ## Installation
 
-npm:
-```sh
+[npm](https://docs.npmjs.com/cli/install):
+
+```bash
 $ npm install datamap-interface
 ```
 
-Component.js:
-```sh
+[Component.js](https://github.com/componentjs/component):
+
+```bash
 $ component install wooorm/datamap-interface
 ```
 
-Bower:
-```sh
+[Bower](http://bower.io/#install-packages):
+
+```bash
 $ bower install datamap-interface
 ```
 
