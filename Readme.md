@@ -133,4 +133,4 @@ Return the map as an `Object`.
 
 ## License
 
-MIT © [Titus Wormer](http;//wooorm.com)
+[MIT](LICENSE) © [Titus Wormer](http;//wooorm.com)
