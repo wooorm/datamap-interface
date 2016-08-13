@@ -12,7 +12,7 @@ deploy:
   - provider: npm
     email: tituswormer@gmail.com
     api_key:
-      secure: UbFlX5D2yaLFQlA+CfECxLAsk1jWCgzPoqe/8VacWr04l5ILYAtQLEaYVxktcK3gjRoTj/Q9iAPE9GGwKFX32xPiygTNgU4WkgFt64Ae8z0xXXWfyZN916FIt79/vHhi/C+8n88zP174rPofFFNdlEQRgLzDpsSQU+vy+yJhtr8=
+      secure: JQo1ogSy9z4p4m4qpPbHx8zeB9rlwIpJG00tr9Hi//KpluzHJwVqWAL984te60mryCuypDVbed7/GSwVusP6YhpEiRWK6dxaWfCXh6fTCD9ZpENzHS+7b1aALr0mVDb3O4vmIZDU4Q8WbYsTvpTVLyuiL24BeI7SOqfGaz/h6QY=
     on:
       tags: true
       node: '5.0'
