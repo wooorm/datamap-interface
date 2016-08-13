@@ -1,162 +1,136 @@
+/**
+ * @author Titus Wormer
+ * @copyright 2014 Titus Wormer
+ * @license MIT
+ * @module datamap-interface
+ * @fileoverview Test suite for `datamap-interface`.
+ */
+
 'use strict';
 
-/*
- * Dependencies.
- */
+/* Dependencies. */
+var test = require('tape');
+var Interface = require('./');
 
-var DatamapInterface,
-    assert;
-
-DatamapInterface = require('./');
-assert = require('assert');
-
-/*
- * Data.
- */
-
-var animals;
-
-animals = new DatamapInterface({
-    'shark': 'fish',
-    'tuna': 'fish',
-    'colugo': 'mammal',
-    'human': 'mammal'
+/* Fixtures. */
+var animals = new Interface({
+  shark: 'fish',
+  tuna: 'fish',
+  colugo: 'mammal',
+  human: 'mammal'
 });
 
-describe('DatamapInterface#get(key)', function () {
-    it('should return the value of an item in the database', function () {
-        assert(animals.get('shark') === 'fish');
-    });
+/* eslint-disable no-use-extend-native/no-use-extend-native */
+/* eslint-disable no-extend-native */
 
-    it('should return null if am item is not in the database', function () {
-        assert(animals.get('unicorn') === null);
-    });
+/* Tests. */
+test('#get(key)', function (t) {
+  t.equal(
+    animals.get('shark'),
+    'fish',
+    'should return the value of an item in the database'
+  );
+
+  t.equal(
+    animals.get('unicorn'),
+    null,
+    'should return null if am item is not in the database'
+  );
+
+  t.end();
 });
 
-describe('DatamapInterface#has(key)', function () {
-    it('should return if an item is in the database', function () {
-        assert(animals.has('shark') === true);
-        assert(animals.has('unicorn') === false);
-    });
+test('#has(key)', function (t) {
+  t.equal(
+    animals.has('shark'),
+    true,
+    'should return `true` if an item is in the database'
+  );
 
-    it('should not fail on prototpe extending', function () {
-        /* eslint-disable no-extend-native */
-        Object.prototype.unicorn = 'mammal';
+  t.equal(
+    animals.has('unicorn'),
+    false,
+    'should return `false` if an item is in the database'
+  );
 
-        assert(!animals.has('unicorn'));
+  Object.prototype.unicorn = 'mammal';
 
-        delete Object.prototype.unicorn;
-        /* eslint-enable no-extend-native */
-    });
+  t.notOk(animals.has('unicorn'), 'should not fail on prototpe extending');
 
-    it('should not fail on native properties', function () {
-        assert(!animals.has('toString'));
-        assert(!animals.has('constructor'));
-        assert(!animals.has('hasOwnProperty'));
-    });
+  delete Object.prototype.unicorn;
+
+  t.notOk(animals.has('toString'), 'should not fail on native properties (1)');
+  t.notOk(animals.has('constructor'), 'should not fail on native properties (2)');
+  t.notOk(animals.has('hasOwnProperty'), 'should not fail on native properties (3)');
+
+  t.end();
 });
 
-describe('DatamapInterface#all()', function () {
-    var all;
+test('#all()', function (t) {
+  t.deepEqual(
+    animals.all(),
+    {
+      shark: 'fish',
+      tuna: 'fish',
+      colugo: 'mammal',
+      human: 'mammal'
+    },
+    'should return all keys/values'
+  );
 
-    all = animals.all();
+  animals.all().unicorn = 'mammal';
 
-    it('should return an object', function () {
-        assert(typeof all === 'object');
-    });
+  t.notOk(animals.has('unicorn'), 'should be immutable');
 
-    it('should return all values in the datamap', function () {
-        assert('shark' in all);
-        assert('tuna' in all);
-        assert('colugo' in all);
-        assert('human' in all);
-    });
-
-    it('should be immutable', function () {
-        all.unicorn = 'mammal';
-
-        assert(!animals.has('unicorn'));
-        assert(!('unicorn' in animals.all()));
-    });
+  t.end();
 });
 
-describe('DatamapInterface#keys()', function () {
-    var keys;
+test('#keys()', function (t) {
+  t.deepEqual(
+    animals.keys(),
+    [
+      'shark',
+      'tuna',
+      'colugo',
+      'human'
+    ],
+    'should return all keys'
+  );
 
-    keys = animals.keys();
+  animals.keys().push('unicorn');
 
-    it('should return an array', function () {
-        assert(Array.isArray(keys));
-    });
+  t.notOk(animals.has('unicorn'), 'should be immutable');
 
-    it('should return all key in the datamap', function () {
-        assert(keys[0] === 'shark');
-        assert(keys[1] === 'tuna');
-        assert(keys[2] === 'colugo');
-        assert(keys[3] === 'human');
-        assert(keys.length === 4);
-    });
-
-    it('should be immutable', function () {
-        keys.push('unicorn');
-
-        assert(!animals.has('unicorn'));
-        assert(animals.keys().indexOf('unicorn') === -1);
-    });
+  t.end();
 });
 
-describe('DatamapInterface#add() and DatamapInterface#remove()', function () {
-    it('should add and remove an item', function () {
-        assert(!animals.has('unicorn'));
+test('#add() and #remove()', function (t) {
+  t.equal(animals.add('unicorn', 'mammal'), animals, '`add` should return self');
+  t.ok(animals.has('unicorn'), 'should add items');
+  t.equal(animals.remove('unicorn'), animals, '`remove` should return self');
+  t.notOk(animals.has('unicorn'), 'should remove items');
 
-        animals.add('unicorn', 'mammal');
+  animals.add({unicorn: 'mammal', doge: 'mammal'});
 
-        assert(animals.has('unicorn'));
+  t.ok(animals.has('unicorn'), 'should add multiple items (1)');
+  t.ok(animals.has('doge'), 'should add multiple items (2)');
 
-        animals.remove('unicorn');
+  animals.remove(['unicorn', 'doge']);
 
-        assert(!animals.has('unicorn'));
-    });
+  t.notOk(animals.has('unicorn'), 'should remove multiple items (1)');
+  t.notOk(animals.has('doge'), 'should remove multiple items (2)');
 
-    it('should add and remove multiple values', function () {
-        assert(!animals.has('unicorn'));
-        assert(!animals.has('doge'));
+  t.notOk(
+    animals.remove('unicorn').has('unicorn'),
+    'should ignore removing a non-existing item'
+  );
 
-        animals.add({
-            'unicorn': 'mammal',
-            'doge': 'mammal'
-        });
+  Object.prototype.platypus = 'mammal';
 
-        assert(animals.has('unicorn'));
-        assert(animals.has('doge'));
+  t.notOk(
+    animals.add({unicorn: 'mammal'}).has('platypus'),
+    'should not fail on prototpe extending'
+  );
 
-        animals.remove(['unicorn', 'doge']);
-
-        assert(!animals.has('unicorn'));
-        assert(!animals.has('doge'));
-    });
-
-    it('should fail silently when removing a non-existing item',
-        function () {
-            assert(animals.has('unicorn') === false);
-
-            animals.remove('unicorn');
-
-            assert(animals.has('unicorn') === false);
-        }
-    );
-
-    it('should not fail on prototpe extending', function () {
-        /* eslint-disable no-extend-native */
-        Object.prototype.platypus = 'mammal';
-
-        animals.add({
-            'unicorn': 'mammal'
-        });
-
-        assert(!animals.has('platypus'));
-
-        delete Object.prototype.platypus;
-        /* eslint-enable no-extend-native */
-    });
+  t.end();
 });

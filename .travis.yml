@@ -1,13 +1,27 @@
 language: node_js
-script: npm run-script test-travis
 node_js:
-- '0.10'
 - '0.11'
-after_script: npm install coveralls@2.10.0 && cat ./coverage/lcov.info | coveralls
+- '0.12'
+- '4.0'
+- '5.0'
+- '6.0'
+sudo: false
+after_success:
+- bash <(curl -s https://codecov.io/bash)
 deploy:
-  provider: npm
-  email: tituswormer@gmail.com
-  api_key:
-    secure: ClDFKAPjQIkn8tpuIEnnLnkOyvKsGnKpx0hDgbTY4j59qNTT7JrMu/zRSWZoBS4Nfsgv5hmNHD0dDkAneFlIXlZuhZeJVckBR8ij2zmLe472VjlSCQeJ5Bz+yLDSKHcafgxz35XNIi/5HXAWBpKEDxiINdL14fiTDd1oPSKcRPw=
-  on:
-    repo: wooorm/datamap-interface
+  - provider: npm
+    email: tituswormer@gmail.com
+    api_key:
+      secure: UbFlX5D2yaLFQlA+CfECxLAsk1jWCgzPoqe/8VacWr04l5ILYAtQLEaYVxktcK3gjRoTj/Q9iAPE9GGwKFX32xPiygTNgU4WkgFt64Ae8z0xXXWfyZN916FIt79/vHhi/C+8n88zP174rPofFFNdlEQRgLzDpsSQU+vy+yJhtr8=
+    on:
+      tags: true
+      node: '5.0'
+  - provider: releases
+    api_key:
+      secure: Zv75/kLyHDxaSC/hV99TOS0xkKH8I4EUYGC5Dx6RnmbazDWReIZmNjyzA8a9YAvvmFpxDT7AbzWThYYCBxY5UyPabn49bgQ94NvRcvejyaHn13jwrEGCT2eZxIMtj5Fi73l2ZV4hKOxVLuGUYc2ubO9WG3VlOjam/GHwilve0Ps=
+    file:
+      - "datamap-interface.js"
+      - "datamap-interface.min.js"
+    on:
+      tags: true
+      node: '6.0'

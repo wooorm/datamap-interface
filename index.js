@@ -1,12 +1,28 @@
-'use strict';
-
-/*
- * Cache.
+/**
+ * @author Titus Wormer
+ * @copyright 2014 Titus Wormer
+ * @license MIT
+ * @module datamap-interface
+ * @fileoverview Simple interface for a map functioning as a database.
  */
 
-var isOwnProperty;
+'use strict';
 
-isOwnProperty = Object.prototype.hasOwnProperty;
+/* Dependencies. */
+var has = require('has');
+
+/* Expose. */
+module.exports = DatamapInterface;
+
+/* Methods. */
+var proto = DatamapInterface.prototype;
+
+proto.add = add;
+proto.remove = remove;
+proto.all = proto.valueOf = proto.toJSON = all;
+proto.get = get;
+proto.has = proto.is = is;
+proto.keys = getKeys;
 
 /**
  * An interface for a map of items.
@@ -15,54 +31,8 @@ isOwnProperty = Object.prototype.hasOwnProperty;
  * @param {Object.<string, *>} values
  */
 function DatamapInterface(values) {
-    this.map = {};
-
-    this.add(values);
-}
-
-/**
- * Detect if a key is defined on an object.
- *
- * @param {Object.<string, *>} object
- * @param {string} key
- * @return {boolean}
- */
-function has(object, key) {
-    return isOwnProperty.call(object, key) && object[key] !== undefined;
-}
-
-/**
- * Loop over an `Object`.
- *
- * @param {Object.<string, *>} object
- * @param {function(string, *)} callback
- */
-function forPropertyInObject(object, callback) {
-    var key;
-
-    for (key in object) {
-        if (has(object, key)) {
-            callback(object[key], key);
-        }
-    }
-}
-
-/**
- * Loop over an `Array`.
- *
- * @param {Array.<*>} array
- * @param {function(*, number)} callback
- */
-function forValueInArray(array, callback) {
-    var index,
-        length;
-
-    index = -1;
-    length = array.length;
-
-    while (++index < length) {
-        callback(array[index], index);
-    }
+  this.map = {};
+  this.add(values);
 }
 
 /**
@@ -72,9 +42,9 @@ function forValueInArray(array, callback) {
  * @param {Object.<string, *>} values
  */
 function addAll(object, values) {
-    forPropertyInObject(values, function (value, key) {
-        object[key] = value;
-    });
+  forPropertyInObject(values, function (value, key) {
+    object[key] = value;
+  });
 }
 
 /**
@@ -84,9 +54,9 @@ function addAll(object, values) {
  * @param {Array.<string>} keys
  */
 function removeAll(object, keys) {
-    forValueInArray(keys, function (key) {
-        object[key] = undefined;
-    });
+  forValueInArray(keys, function (key) {
+    object[key] = undefined;
+  });
 }
 
 /**
@@ -101,17 +71,15 @@ function removeAll(object, keys) {
  * @param {*} value
  */
 function add(values, value) {
-    var self;
+  var self = this;
 
-    self = this;
+  if (value) {
+    self.map[values] = value;
+  } else {
+    addAll(self.map, values);
+  }
 
-    if (value) {
-        self.map[values] = value;
-    } else {
-        addAll(self.map, values);
-    }
-
-    return self;
+  return self;
 }
 
 /**
@@ -125,17 +93,15 @@ function add(values, value) {
  * @param {Array.<string>|string} keys
  */
 function remove(keys) {
-    var self;
+  var self = this;
 
-    self = this;
+  if (typeof keys === 'string') {
+    self.map[keys] = undefined;
+  } else {
+    removeAll(self.map, keys);
+  }
 
-    if (typeof keys === 'string') {
-        self.map[keys] = undefined;
-    } else {
-        removeAll(self.map, keys);
-    }
-
-    return self;
+  return self;
 }
 
 /**
@@ -145,13 +111,11 @@ function remove(keys) {
  * @return {Object.<string, *>}
  */
 function all() {
-    var values;
+  var values = {};
 
-    values = {};
+  addAll(values, this.map);
 
-    addAll(values, this.map);
-
-    return values;
+  return values;
 }
 
 /**
@@ -161,18 +125,14 @@ function all() {
  * @return {Array.<string>}
  */
 function getKeys() {
-    var result,
-        index;
+  var result = [];
+  var index = -1;
 
-    result = [];
+  forPropertyInObject(this.map, function (value, key) {
+    result[++index] = key;
+  });
 
-    index = -1;
-
-    forPropertyInObject(this.map, function (value, key) {
-        result[++index] = key;
-    });
-
-    return result;
+  return result;
 }
 
 /**
@@ -183,7 +143,7 @@ function getKeys() {
  * @return {*}
  */
 function get(key) {
-    return has(this.map, key) ? this.map[key] : null;
+  return real(this.map, key) ? this.map[key] : null;
 }
 
 /**
@@ -193,30 +153,48 @@ function get(key) {
  * @param {string} key
  * @return {boolean}
  */
-function datamapHas(key) {
-    return has(this.map, key);
+function is(key) {
+  return real(this.map, key);
 }
 
-/*
- * Expose methods on prototype.
+/**
+ * Loop over an `Object`.
+ *
+ * @param {Object.<string, *>} object
+ * @param {function(string, *)} callback
  */
+function forPropertyInObject(object, callback) {
+  var key;
 
-var datamapInterfacePrototype;
+  for (key in object) {
+    if (real(object, key)) {
+      callback(object[key], key);
+    }
+  }
+}
 
-datamapInterfacePrototype = DatamapInterface.prototype;
-
-datamapInterfacePrototype.add = add;
-datamapInterfacePrototype.remove = remove;
-datamapInterfacePrototype.all = all;
-datamapInterfacePrototype.valueOf = all;
-datamapInterfacePrototype.toJSON = all;
-datamapInterfacePrototype.get = get;
-datamapInterfacePrototype.has = datamapHas;
-datamapInterfacePrototype.is = datamapHas;
-datamapInterfacePrototype.keys = getKeys;
-
-/*
- * Expose `DatamapInterface`.
+/**
+ * Loop over an `Array`.
+ *
+ * @param {Array.<*>} array
+ * @param {function(*, number)} callback
  */
+function forValueInArray(array, callback) {
+  var index = -1;
+  var length = array.length;
 
-module.exports = DatamapInterface;
+  while (++index < length) {
+    callback(array[index], index);
+  }
+}
+
+/**
+ * Detect if a key is defined on an object.
+ *
+ * @param {Object.<string, *>} object
+ * @param {string} key
+ * @return {boolean}
+ */
+function real(object, key) {
+  return has(object, key) && object[key] !== undefined;
+}
