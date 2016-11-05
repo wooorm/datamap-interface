@@ -1,11 +1,9 @@
 language: node_js
 node_js:
 - '4.0'
-- '5.0'
-- '6.0'
+- '7.0'
 sudo: false
-after_success:
-- bash <(curl -s https://codecov.io/bash)
+after_script: bash <(curl -s https://codecov.io/bash)
 deploy:
   - provider: npm
     email: tituswormer@gmail.com
@@ -13,7 +11,7 @@ deploy:
       secure: JQo1ogSy9z4p4m4qpPbHx8zeB9rlwIpJG00tr9Hi//KpluzHJwVqWAL984te60mryCuypDVbed7/GSwVusP6YhpEiRWK6dxaWfCXh6fTCD9ZpENzHS+7b1aALr0mVDb3O4vmIZDU4Q8WbYsTvpTVLyuiL24BeI7SOqfGaz/h6QY=
     on:
       tags: true
-      node: '5.0'
+      node: '4.0'
   - provider: releases
     api_key:
       secure: Zv75/kLyHDxaSC/hV99TOS0xkKH8I4EUYGC5Dx6RnmbazDWReIZmNjyzA8a9YAvvmFpxDT7AbzWThYYCBxY5UyPabn49bgQ94NvRcvejyaHn13jwrEGCT2eZxIMtj5Fi73l2ZV4hKOxVLuGUYc2ubO9WG3VlOjam/GHwilve0Ps=
@@ -22,4 +20,4 @@ deploy:
       - "datamap-interface.min.js"
     on:
       tags: true
-      node: '6.0'
+      node: '7.0'
