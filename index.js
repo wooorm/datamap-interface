@@ -1,11 +1,3 @@
-/**
- * @author Titus Wormer
- * @copyright 2014 Titus Wormer
- * @license MIT
- * @module datamap-interface
- * @fileoverview Simple interface for a map functioning as a database.
- */
-
 'use strict';
 
 /* Dependencies. */

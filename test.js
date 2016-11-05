@@ -1,11 +1,3 @@
-/**
- * @author Titus Wormer
- * @copyright 2014 Titus Wormer
- * @license MIT
- * @module datamap-interface
- * @fileoverview Test suite for `datamap-interface`.
- */
-
 'use strict';
 
 /* Dependencies. */
