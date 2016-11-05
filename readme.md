@@ -60,11 +60,11 @@ Create a new instance.  Values are passed to [`#add()`][add].
 var DatamapInterface = require('datamap-interface');
 
 var animals = new DatamapInterface({
-    'unicorn' : 'mystical creature',
-    'shark' : 'fish',
-    'tuna' : 'fish',
-    'colugo' : 'mammal',
-    'human' : 'mammal'
+  unicorn: 'mystical creature',
+  shark: 'fish',
+  tuna: 'fish',
+  colugo: 'mammal',
+  human: 'mammal'
 });
 ```
 
