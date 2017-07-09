@@ -1,10 +1,8 @@
 'use strict';
 
-/* Dependencies. */
 var test = require('tape');
 var Interface = require('./');
 
-/* Fixtures. */
 var animals = new Interface({
   shark: 'fish',
   tuna: 'fish',
@@ -15,7 +13,6 @@ var animals = new Interface({
 /* eslint-disable no-use-extend-native/no-use-extend-native */
 /* eslint-disable no-extend-native */
 
-/* Tests. */
 test('#get(key)', function (t) {
   t.equal(
     animals.get('shark'),

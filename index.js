@@ -1,12 +1,9 @@
 'use strict';
 
-/* Dependencies. */
 var has = require('has');
 
-/* Expose. */
 module.exports = DatamapInterface;
 
-/* Methods. */
 var proto = DatamapInterface.prototype;
 
 proto.add = add;
@@ -19,52 +16,30 @@ proto.has = is;
 proto.is = is;
 proto.keys = getKeys;
 
-/**
- * An interface for a map of items.
- *
- * @constructor
- * @param {Object.<string, *>} values
- */
+/* Interface for a map of items. */
 function DatamapInterface(values) {
   this.map = {};
   this.add(values);
 }
 
-/**
- * Add all `values` to `object`.
- *
- * @param {Object.<string, *>} object
- * @param {Object.<string, *>} values
- */
+/* Add all `values` to `object`. */
 function addAll(object, values) {
   forPropertyInObject(values, function (value, key) {
     object[key] = value;
   });
 }
 
-/**
- * Remove every key in `keys` from `object`.
- *
- * @param {Object.<string, *>} object
- * @param {Array.<string>} keys
- */
+/* Remove every key in `keys` from `object`. */
 function removeAll(object, keys) {
   forValueInArray(keys, function (key) {
     object[key] = undefined;
   });
 }
 
-/**
- * Add values to map.
- *
- * When the second argument is passed, it is treated as
+/* Add values to map.
+ * When the second argument is given, it is treated as
  * a single value and the first parameter as a key.
- * Otherwise, every value in the first argument is added.
- *
- * @this DatamapInterface
- * @param {Object.<string, *>|string} values
- * @param {*} value
- */
+ * Otherwise, every value in the first argument is added. */
 function add(values, value) {
   var self = this;
 
@@ -77,16 +52,10 @@ function add(values, value) {
   return self;
 }
 
-/**
- * Remove keys from map.
- *
- * When the second argument is passed, it is treated as
+/* Remove keys from map.
+ * When the second argument is given, it is treated as
  * a single value and the first parameter as a key.
- * Otherwise, every value in the first argument is added.
- *
- * @this DatamapInterface
- * @param {Array.<string>|string} keys
- */
+ * Otherwise, every value in the first argument is added. */
 function remove(keys) {
   var self = this;
 
@@ -99,12 +68,7 @@ function remove(keys) {
   return self;
 }
 
-/**
- * Get all values.
- *
- * @this DatamapInterface
- * @return {Object.<string, *>}
- */
+/* Get all values. */
 function all() {
   var values = {};
 
@@ -113,12 +77,7 @@ function all() {
   return values;
 }
 
-/**
- * Get all keys.
- *
- * @this DatamapInterface
- * @return {Array.<string>}
- */
+/* Get all keys. */
 function getKeys() {
   var result = [];
   var index = -1;
@@ -130,34 +89,17 @@ function getKeys() {
   return result;
 }
 
-/**
- * Get a value.
- *
- * @this DatamapInterface
- * @param {string} key
- * @return {*}
- */
+/* Get a value. */
 function get(key) {
   return real(this.map, key) ? this.map[key] : null;
 }
 
-/**
- * Whether or not `value` is in context.
- *
- * @this DatamapInterface
- * @param {string} key
- * @return {boolean}
- */
+/* Whether or not `value` is in context. */
 function is(key) {
   return real(this.map, key);
 }
 
-/**
- * Loop over an `Object`.
- *
- * @param {Object.<string, *>} object
- * @param {function(string, *)} callback
- */
+/* Loop over an `Object`. */
 function forPropertyInObject(object, callback) {
   var key;
 
@@ -168,12 +110,7 @@ function forPropertyInObject(object, callback) {
   }
 }
 
-/**
- * Loop over an `Array`.
- *
- * @param {Array.<*>} array
- * @param {function(*, number)} callback
- */
+/* Loop over an `Array`. */
 function forValueInArray(array, callback) {
   var index = -1;
   var length = array.length;
@@ -183,13 +120,7 @@ function forValueInArray(array, callback) {
   }
 }
 
-/**
- * Detect if a key is defined on an object.
- *
- * @param {Object.<string, *>} object
- * @param {string} key
- * @return {boolean}
- */
+/* Detect if a key is defined on an object. */
 function real(object, key) {
   return has(object, key) && object[key] !== undefined;
 }
