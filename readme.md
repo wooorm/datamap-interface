@@ -22,12 +22,12 @@ var animals = new DatamapInterface({
   human: 'mammal'
 });
 
-animals.get('human'); // 'mammal'
-animals.get('unicorn'); // null
+animals.get('human'); //=> 'mammal'
+animals.get('unicorn'); //=> null
 
-animals.add('unicorn', 'mammal').get('unicorn'); // 'mammal'
+animals.add('unicorn', 'mammal').get('unicorn'); //=> 'mammal'
 
-animals.remove('unicorn').has('unicorn'); // false
+animals.remove('unicorn').has('unicorn'); //=> false
 ```
 
 ## API
@@ -77,8 +77,8 @@ Check if `value` is in the map.
 ###### Example
 
 ```js
-animals.has('unicorn'); // true
-animals.has('rainbow'); // false
+animals.has('unicorn'); //=> true
+animals.has('rainbow'); //=> false
 ```
 
 ### `datamapInterface#get(key)`
@@ -88,8 +88,8 @@ Get the value of `key`, or `null`.
 ###### Example
 
 ```js
-animals.get('unicorn'); // 'mystical creature'
-animals.get('rainbow'); // null
+animals.get('unicorn'); //=> 'mystical creature'
+animals.get('rainbow'); //=> null
 ```
 
 ### `datamapInterface#add(values)`
@@ -122,7 +122,7 @@ Get each key in the map.
 ###### Example
 
 ```js
-animals.keys(); // ['shark', 'tuna', 'colugo', 'unicorn']
+animals.keys(); //=> ['shark', 'tuna', 'colugo', 'unicorn']
 ```
 
 ### `datamapInterface#all()`
@@ -149,6 +149,11 @@ Yields:
   unicorn: 'mystical creature'
 }
 ```
+
+## Related
+
+*   [datalist-interface](https://github.com/wooorm/datalist-interface)
+    — Simple interface for a list functioning as a database
 
 ## License
 
