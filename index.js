@@ -11,9 +11,12 @@ var proto = DatamapInterface.prototype;
 
 proto.add = add;
 proto.remove = remove;
-proto.all = proto.valueOf = proto.toJSON = all;
+proto.all = all;
+proto.valueOf = all;
+proto.toJSON = all;
 proto.get = get;
-proto.has = proto.is = is;
+proto.has = is;
+proto.is = is;
 proto.keys = getKeys;
 
 /**
