@@ -1,8 +1,8 @@
 'use strict';
 
-var has = require('has');
-
 module.exports = DatamapInterface;
+
+var own = {}.hasOwnProperty;
 
 var proto = DatamapInterface.prototype;
 
@@ -122,5 +122,5 @@ function forValueInArray(array, callback) {
 
 /* Detect if a key is defined on an object. */
 function real(object, key) {
-  return has(object, key) && object[key] !== undefined;
+  return own.call(object, key) && object[key] !== undefined;
 }
