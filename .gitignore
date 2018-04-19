@@ -5,3 +5,4 @@ coverage/
 node_modules/
 datamap-interface.js
 datamap-interface.min.js
+yarn.lock
