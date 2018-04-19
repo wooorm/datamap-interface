@@ -13,21 +13,21 @@ npm install datamap-interface
 ## Usage
 
 ```js
-var DatamapInterface = require('datamap-interface');
+var DatamapInterface = require('datamap-interface')
 
 var animals = new DatamapInterface({
   shark: 'fish',
   tuna: 'fish',
   colugo: 'mammal',
   human: 'mammal'
-});
+})
 
-animals.get('human'); //=> 'mammal'
-animals.get('unicorn'); //=> null
+animals.get('human') // => 'mammal'
+animals.get('unicorn') // => null
 
-animals.add('unicorn', 'mammal').get('unicorn'); //=> 'mammal'
+animals.add('unicorn', 'mammal').get('unicorn') // => 'mammal'
 
-animals.remove('unicorn').has('unicorn'); //=> false
+animals.remove('unicorn').has('unicorn') // => false
 ```
 
 ## API
@@ -37,15 +37,15 @@ animals.remove('unicorn').has('unicorn'); //=> false
 **datamap-interface** exports a constructor, which can be passed an object.
 
 ```js
-var DatamapInterface = require('datamap-interface');
+var DatamapInterface = require('datamap-interface')
 
 var animals = new DatamapInterface({
-    'unicorn' : 'mystical creature',
-    'shark' : 'fish',
-    'tuna' : 'fish',
-    'colugo' : 'mammal',
-    'human' : 'mammal'
-});
+  unicorn: 'mystical creature',
+  shark: 'fish',
+  tuna: 'fish',
+  colugo: 'mammal',
+  human: 'mammal'
+})
 ```
 
 ## API
@@ -57,7 +57,7 @@ Create a new instance.  Values are passed to [`#add()`][add].
 ###### Example
 
 ```js
-var DatamapInterface = require('datamap-interface');
+var DatamapInterface = require('datamap-interface')
 
 var animals = new DatamapInterface({
   unicorn: 'mystical creature',
@@ -65,7 +65,7 @@ var animals = new DatamapInterface({
   tuna: 'fish',
   colugo: 'mammal',
   human: 'mammal'
-});
+})
 ```
 
 ### `datamapInterface#has(value)`
@@ -77,8 +77,8 @@ Check if `value` is in the map.
 ###### Example
 
 ```js
-animals.has('unicorn'); //=> true
-animals.has('rainbow'); //=> false
+animals.has('unicorn') // => true
+animals.has('rainbow') // => false
 ```
 
 ### `datamapInterface#get(key)`
@@ -88,8 +88,8 @@ Get the value of `key`, or `null`.
 ###### Example
 
 ```js
-animals.get('unicorn'); //=> 'mystical creature'
-animals.get('rainbow'); //=> null
+animals.get('unicorn') // => 'mystical creature'
+animals.get('rainbow') // => null
 ```
 
 ### `datamapInterface#add(values)`
@@ -99,9 +99,9 @@ Add each value, or one pair.
 ###### Example
 
 ```js
-animals.add('giant grouper', 'fish');
+animals.add('giant grouper', 'fish')
 
-animals.add({dragon : 'mystical creature'});
+animals.add({dragon: 'mystical creature'})
 ```
 
 ### `datamapInterface#remove([values])`
@@ -111,8 +111,8 @@ Remove each value.
 ###### Example
 
 ```js
-animals.remove(['giant grouper', 'human']);
-animals.remove('dragon');
+animals.remove(['giant grouper', 'human'])
+animals.remove('dragon')
 ```
 
 ### `datamapInterface#keys()`
@@ -122,7 +122,7 @@ Get each key in the map.
 ###### Example
 
 ```js
-animals.keys(); //=> ['shark', 'tuna', 'colugo', 'unicorn']
+animals.keys() // => ['shark', 'tuna', 'colugo', 'unicorn']
 ```
 
 ### `datamapInterface#all()`
@@ -136,7 +136,7 @@ Return the list as an `Object`.
 ###### Example
 
 ```js
-animals.all();
+animals.all()
 ```
 
 Yields:
