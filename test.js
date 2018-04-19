@@ -1,7 +1,7 @@
 'use strict';
 
 var test = require('tape');
-var Interface = require('./');
+var Interface = require('.');
 
 var animals = new Interface({
   shark: 'fish',
