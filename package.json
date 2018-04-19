@@ -8,7 +8,7 @@
     "word",
     "map"
   ],
-  "repository": "https://github.com/wooorm/datamap-interface",
+  "repository": "wooorm/datamap-interface",
   "bugs": "https://github.com/wooorm/datamap-interface/issues",
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "contributors": [
