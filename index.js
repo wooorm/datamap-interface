@@ -16,13 +16,13 @@ proto.has = is
 proto.is = is
 proto.keys = getKeys
 
-/* Interface for a map of items. */
+// Interface for a map of items.
 function DatamapInterface(values) {
   this.map = {}
   this.add(values)
 }
 
-/* Add all `values` to `object`. */
+// Add all `values` to `object`.
 function addAll(object, values) {
   forPropertyInObject(values, set)
 
@@ -31,7 +31,7 @@ function addAll(object, values) {
   }
 }
 
-/* Remove every key in `keys` from `object`. */
+// Remove every key in `keys` from `object`.
 function removeAll(object, keys) {
   forValueInArray(keys, unset)
 
@@ -40,10 +40,10 @@ function removeAll(object, keys) {
   }
 }
 
-/* Add values to map.
- * When the second argument is given, it is treated as
- * a single value and the first parameter as a key.
- * Otherwise, every value in the first argument is added. */
+// Add values to map.
+// When the second argument is given, it is treated as a single value and the
+// first parameter as a key.
+// Otherwise, every value in the first argument is added.
 function add(values, value) {
   var self = this
 
@@ -56,10 +56,10 @@ function add(values, value) {
   return self
 }
 
-/* Remove keys from map.
- * When the second argument is given, it is treated as
- * a single value and the first parameter as a key.
- * Otherwise, every value in the first argument is added. */
+// Remove keys from map.
+// When the second argument is given, it is treated as a single value and the
+// first parameter as a key.
+// Otherwise, every value in the first argument is added.
 function remove(keys) {
   var self = this
 
@@ -72,7 +72,7 @@ function remove(keys) {
   return self
 }
 
-/* Get all values. */
+// Get all values.
 function all() {
   var values = {}
 
@@ -81,7 +81,7 @@ function all() {
   return values
 }
 
-/* Get all keys. */
+// Get all keys.
 function getKeys() {
   var result = []
   var index = -1
@@ -95,17 +95,17 @@ function getKeys() {
   }
 }
 
-/* Get a value. */
+// Get a value.
 function get(key) {
   return real(this.map, key) ? this.map[key] : null
 }
 
-/* Whether or not `value` is in context. */
+// Whether or not `value` is in context.
 function is(key) {
   return real(this.map, key)
 }
 
-/* Loop over an `Object`. */
+// Loop over an `Object`.
 function forPropertyInObject(object, callback) {
   var key
 
@@ -116,7 +116,7 @@ function forPropertyInObject(object, callback) {
   }
 }
 
-/* Loop over an `Array`. */
+// Loop over an `Array`.
 function forValueInArray(array, callback) {
   var index = -1
   var length = array.length
@@ -126,7 +126,7 @@ function forValueInArray(array, callback) {
   }
 }
 
-/* Detect if a key is defined on an object. */
+// Detect if a key is defined on an object.
 function real(object, key) {
   return own.call(object, key) && object[key] !== undefined
 }
