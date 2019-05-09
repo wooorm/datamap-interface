@@ -31,7 +31,7 @@
   "scripts": {
     "format": "remark . -qfo && prettier --write \"**/*.js\" && xo --fix",
     "build-bundle": "browserify . -s DatamapInterface -o datamap-interface.js",
-    "build-bundle": "browserify . -s DatamapInterface -p tinyify -o datamap-interface.min.js",
+    "build-mangle": "browserify . -s DatamapInterface -p tinyify -o datamap-interface.min.js",
     "build": "npm run build-bundle && npm run build-mangle",
     "test-api": "node test",
     "test-coverage": "nyc --reporter lcov tape test.js",
