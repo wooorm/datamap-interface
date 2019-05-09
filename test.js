@@ -124,3 +124,6 @@ test('#add() and #remove()', function(t) {
 
   t.end()
 })
+
+/* eslint-enable no-use-extend-native/no-use-extend-native */
+/* eslint-enable no-extend-native */
