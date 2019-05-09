@@ -1,4 +1,9 @@
-# datamap-interface [![Build Status][travis-badge]][travis] [![Coverage Status][codecov-badge]][codecov]
+# datamap-interface
+
+[![Build][build-badge]][build]
+[![Coverage][coverage-badge]][coverage]
+[![Downloads][downloads-badge]][downloads]
+[![Size][size-badge]][size]
 
 A simple interface for a map.
 
@@ -161,13 +166,21 @@ Yields:
 
 <!-- Definitions -->
 
-[travis-badge]: https://img.shields.io/travis/wooorm/datamap-interface.svg
+[build-badge]: https://img.shields.io/travis/wooorm/datamap-interface.svg
 
-[travis]: https://travis-ci.org/wooorm/datamap-interface
+[build]: https://travis-ci.org/wooorm/datamap-interface
 
-[codecov-badge]: https://img.shields.io/codecov/c/github/wooorm/datamap-interface.svg
+[coverage-badge]: https://img.shields.io/codecov/c/github/wooorm/datamap-interface.svg
 
-[codecov]: https://codecov.io/github/wooorm/datamap-interface
+[coverage]: https://codecov.io/github/wooorm/datamap-interface
+
+[downloads-badge]: https://img.shields.io/npm/dm/datamap-interface.svg
+
+[downloads]: https://www.npmjs.com/package/datamap-interface
+
+[size-badge]: https://img.shields.io/bundlephobia/minzip/datamap-interface.svg
+
+[size]: https://bundlephobia.com/result?p=datamap-interface
 
 [npm]: https://docs.npmjs.com/cli/install
 
