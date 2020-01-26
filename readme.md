@@ -53,8 +53,6 @@ var animals = new DatamapInterface({
 })
 ```
 
-## API
-
 ### `datamapInterface([values])`
 
 Create a new instance.
