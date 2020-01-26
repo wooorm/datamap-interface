@@ -5,17 +5,17 @@
 [![Downloads][downloads-badge]][downloads]
 [![Size][size-badge]][size]
 
-A simple interface for a map.
+A basic interface for a map.
 
-## Installation
+## Install
 
 [npm][]:
 
-```bash
+```sh
 npm install datamap-interface
 ```
 
-## Usage
+## Use
 
 ```js
 var DatamapInterface = require('datamap-interface')
@@ -57,7 +57,8 @@ var animals = new DatamapInterface({
 
 ### `datamapInterface([values])`
 
-Create a new instance.  Values are passed to [`#add()`][add].
+Create a new instance.
+Values are passed to [`#add()`][add].
 
 ###### Example
 
@@ -158,7 +159,7 @@ Yields:
 ## Related
 
 *   [datalist-interface](https://github.com/wooorm/datalist-interface)
-    — Simple interface for a list functioning as a database
+    — Basic interface for a list functioning as a database
 
 ## License
 
