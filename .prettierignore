@@ -1,3 +1,5 @@
 coverage/
 datamap-interface.js
 datamap-interface.min.js
+*.json
+*.md

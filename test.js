@@ -13,7 +13,7 @@ var animals = new Interface({
 /* eslint-disable no-use-extend-native/no-use-extend-native */
 /* eslint-disable no-extend-native */
 
-test('#get(key)', function(t) {
+test('#get(key)', function (t) {
   t.equal(
     animals.get('shark'),
     'fish',
@@ -29,7 +29,7 @@ test('#get(key)', function(t) {
   t.end()
 })
 
-test('#has(key)', function(t) {
+test('#has(key)', function (t) {
   t.equal(
     animals.has('shark'),
     true,
@@ -61,7 +61,7 @@ test('#has(key)', function(t) {
   t.end()
 })
 
-test('#all()', function(t) {
+test('#all()', function (t) {
   t.deepEqual(
     animals.all(),
     {
@@ -80,7 +80,7 @@ test('#all()', function(t) {
   t.end()
 })
 
-test('#keys()', function(t) {
+test('#keys()', function (t) {
   t.deepEqual(
     animals.keys(),
     ['shark', 'tuna', 'colugo', 'human'],
@@ -94,7 +94,7 @@ test('#keys()', function(t) {
   t.end()
 })
 
-test('#add() and #remove()', function(t) {
+test('#add() and #remove()', function (t) {
   t.equal(animals.add('unicorn', 'mammal'), animals, '`add` should return self')
   t.ok(animals.has('unicorn'), 'should add items')
   t.equal(animals.remove('unicorn'), animals, '`remove` should return self')
