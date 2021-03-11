@@ -45,15 +45,13 @@ function removeAll(object, keys) {
 // first parameter as a key.
 // Otherwise, every value in the first argument is added.
 function add(values, value) {
-  var self = this
-
   if (value) {
-    self.map[values] = value
+    this.map[values] = value
   } else {
-    addAll(self.map, values)
+    addAll(this.map, values)
   }
 
-  return self
+  return this
 }
 
 // Remove keys from map.
@@ -61,15 +59,13 @@ function add(values, value) {
 // first parameter as a key.
 // Otherwise, every value in the first argument is added.
 function remove(keys) {
-  var self = this
-
   if (typeof keys === 'string') {
-    self.map[keys] = undefined
+    this.map[keys] = undefined
   } else {
-    removeAll(self.map, keys)
+    removeAll(this.map, keys)
   }
 
-  return self
+  return this
 }
 
 // Get all values.
