@@ -165,9 +165,9 @@ Yields:
 
 <!-- Definitions -->
 
-[build-badge]: https://img.shields.io/travis/wooorm/datamap-interface.svg
+[build-badge]: https://github.com/wooorm/datamap-interface/workflows/main/badge.svg
 
-[build]: https://travis-ci.org/wooorm/datamap-interface
+[build]: https://github.com/wooorm/datamap-interface/actions
 
 [coverage-badge]: https://img.shields.io/codecov/c/github/wooorm/datamap-interface.svg
 
