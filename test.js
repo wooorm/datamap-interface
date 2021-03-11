@@ -1,9 +1,7 @@
-'use strict'
+import test from 'tape'
+import {DatamapInterface} from './index.js'
 
-var test = require('tape')
-var Interface = require('.')
-
-var animals = new Interface({
+var animals = new DatamapInterface({
   shark: 'fish',
   tuna: 'fish',
   colugo: 'mammal',

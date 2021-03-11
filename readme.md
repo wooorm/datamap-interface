@@ -9,6 +9,9 @@ A basic interface for a map.
 
 ## Install
 
+This package is ESM only: Node 12+ is needed to use it and it must be `import`ed
+instead of `require`d.
+
 [npm][]:
 
 ```sh
@@ -18,7 +21,7 @@ npm install datamap-interface
 ## Use
 
 ```js
-var DatamapInterface = require('datamap-interface')
+import {DatamapInterface} from 'datamap-interface'
 
 var animals = new DatamapInterface({
   shark: 'fish',
@@ -37,12 +40,15 @@ animals.remove('unicorn').has('unicorn') // => false
 
 ## API
 
+This package exports the following identifiers: `DatamapInterface`.
+There is no default export.
+
 ### DatamapInterface(values)
 
-**datamap-interface** exports a constructor, which can be passed an object.
+`DatamapInterface` is a constructor, which can be passed an object.
 
 ```js
-var DatamapInterface = require('datamap-interface')
+import {DatamapInterface} from 'datamap-interface'
 
 var animals = new DatamapInterface({
   unicorn: 'mystical creature',
@@ -53,7 +59,7 @@ var animals = new DatamapInterface({
 })
 ```
 
-### `datamapInterface([values])`
+### `DatamapInterface([values])`
 
 Create a new instance.
 Values are passed to [`#add()`][add].
@@ -61,7 +67,7 @@ Values are passed to [`#add()`][add].
 ###### Example
 
 ```js
-var DatamapInterface = require('datamap-interface')
+import {DatamapInterface} from 'datamap-interface'
 
 var animals = new DatamapInterface({
   unicorn: 'mystical creature',
@@ -72,9 +78,9 @@ var animals = new DatamapInterface({
 })
 ```
 
-### `datamapInterface#has(value)`
+### `DatamapInterface#has(value)`
 
-### `datamapInterface#is(value)`
+### `DatamapInterface#is(value)`
 
 Check if `value` is in the map.
 
@@ -85,7 +91,7 @@ animals.has('unicorn') // => true
 animals.has('rainbow') // => false
 ```
 
-### `datamapInterface#get(key)`
+### `DatamapInterface#get(key)`
 
 Get the value of `key`, or `null`.
 
@@ -96,7 +102,7 @@ animals.get('unicorn') // => 'mystical creature'
 animals.get('rainbow') // => null
 ```
 
-### `datamapInterface#add(values)`
+### `DatamapInterface#add(values)`
 
 Add each value, or one pair.
 
@@ -108,7 +114,7 @@ animals.add('giant grouper', 'fish')
 animals.add({dragon: 'mystical creature'})
 ```
 
-### `datamapInterface#remove([values])`
+### `DatamapInterface#remove([values])`
 
 Remove each value.
 
@@ -119,7 +125,7 @@ animals.remove(['giant grouper', 'human'])
 animals.remove('dragon')
 ```
 
-### `datamapInterface#keys()`
+### `DatamapInterface#keys()`
 
 Get each key in the map.
 
@@ -129,11 +135,11 @@ Get each key in the map.
 animals.keys() // => ['shark', 'tuna', 'colugo', 'unicorn']
 ```
 
-### `datamapInterface#all()`
+### `DatamapInterface#all()`
 
-### `datamapInterface#valueOf()`
+### `DatamapInterface#valueOf()`
 
-### `datamapInterface#toJSON()`
+### `DatamapInterface#toJSON()`
 
 Return the list as an `Object`.
 

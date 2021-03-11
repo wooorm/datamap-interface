@@ -1,7 +1,3 @@
-'use strict'
-
-module.exports = DatamapInterface
-
 var own = {}.hasOwnProperty
 
 var proto = DatamapInterface.prototype
@@ -17,7 +13,7 @@ proto.is = is
 proto.keys = getKeys
 
 // Interface for a map of items.
-function DatamapInterface(values) {
+export function DatamapInterface(values) {
   this.map = {}
   this.add(values)
 }
