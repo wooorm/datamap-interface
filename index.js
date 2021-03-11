@@ -1,20 +1,37 @@
 var own = {}.hasOwnProperty
 
-// Interface for a map of items.
+/**
+ * A basic interface for a map.
+ *
+ * @template Item
+ */
 export class DatamapInterface {
+  /**
+   * Create a new data map.
+   * Values are passed to `#add()`.
+   *
+   * @param {Record.<string, Item>} [values]
+   */
   constructor(values) {
+    /** @type Record.<string, Item> */
     this.map = {}
     this.add(values)
   }
 
-  // Add values to map.
-  // When the second argument is given, it is treated as a single value and the
-  // first parameter as a key.
-  // Otherwise, every value in the first argument is added.
+  /**
+   * Add values to map.
+   * When the second argument is given, it is treated as a single value and the
+   * first parameter as a key.
+   * Otherwise, every value in the first argument is added.
+   *
+   * @param {string | Record.<string, Item>} values
+   * @param {Item} [value]
+   * @returns {this}
+   */
   add(values, value) {
     var key
 
-    if (value) {
+    if (typeof values === 'string') {
       this.map[values] = value
     } else {
       for (key in values) {
@@ -27,10 +44,13 @@ export class DatamapInterface {
     return this
   }
 
-  // Remove keys from map.
-  // When the second argument is given, it is treated as a single value and the
-  // first parameter as a key.
-  // Otherwise, every value in the first argument is added.
+  /**
+   * Remove things from map by key.
+   * One or more keys can be given.
+   *
+   * @param {string|string[]} keys One or more keys
+   * @return {this}
+   */
   remove(keys) {
     var index = -1
 
@@ -45,8 +65,13 @@ export class DatamapInterface {
     return this
   }
 
-  // Get all values.
+  /**
+   * Get values in map.
+   *
+   * @returns {Record.<string, Item>} Values
+   */
   all() {
+    /** @type {Record.<string, Item>} */
     var values = {}
     var key
 
@@ -59,31 +84,61 @@ export class DatamapInterface {
     return values
   }
 
+  /**
+   * Get values in map.
+   *
+   * @returns {Record.<string, Item>} Values
+   */
   valueOf() {
     return this.all()
   }
 
+  /**
+   * Get values in map.
+   *
+   * @returns {Record.<string, Item>} Values
+   */
   toJSON() {
     return this.all()
   }
 
-  // Get a value.
+  /**
+   * Get a value from map by key.
+   *
+   * @param {string} key
+   * @returns {Item?} Value
+   */
   get(key) {
     return own.call(this.map, key) && this.map[key] !== undefined
       ? this.map[key]
       : null
   }
 
-  // Whether or not `value` is in context.
+  /**
+   * Whether or not `key` is in context.
+   *
+   * @param {string} key
+   * @returns {boolean} Whether or not `key` is in context.
+   */
   is(key) {
     return own.call(this.map, key) && this.map[key] !== undefined
   }
 
+  /**
+   * Whether or not `key` is in context.
+   *
+   * @param {string} key
+   * @returns {boolean} Whether or not `key` is in context.
+   */
   has(key) {
     return this.is(key)
   }
 
-  // Get all keys.
+  /**
+   * Get all keys.
+   *
+   * @returns {string[]} Keys in context.
+   */
   keys() {
     var result = []
     var key
