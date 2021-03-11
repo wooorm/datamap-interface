@@ -2,5 +2,6 @@
 *.d.ts
 *.log
 coverage/
+coverage-ts/
 node_modules/
 yarn.lock

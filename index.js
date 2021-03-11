@@ -29,6 +29,7 @@ export class DatamapInterface {
    * @returns {this}
    */
   add(values, value) {
+    /** @type {string} */
     var key
 
     if (typeof values === 'string') {
@@ -73,6 +74,7 @@ export class DatamapInterface {
   all() {
     /** @type {Record.<string, Item>} */
     var values = {}
+    /** @type {string} */
     var key
 
     for (key in this.map) {
@@ -140,7 +142,9 @@ export class DatamapInterface {
    * @returns {string[]} Keys in context.
    */
   keys() {
+    /** @type {string[]} */
     var result = []
+    /** @type {string} */
     var key
 
     for (key in this.map) {
