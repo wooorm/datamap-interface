@@ -75,6 +75,14 @@ test('#all()', function (t) {
 
   t.notOk(animals.has('unicorn'), 'should be immutable')
 
+  t.deepEqual(
+    animals.all(),
+    animals.valueOf(),
+    'should be aliased as `valueOf`'
+  )
+
+  t.deepEqual(animals.all(), animals.toJSON(), 'should be aliased as `toJSON`')
+
   t.end()
 })
 
