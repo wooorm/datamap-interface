@@ -39,12 +39,11 @@
     "xo": "^0.38.0"
   },
   "scripts": {
-    "prepublishOnly": "npm run build && npm run format",
-    "prebuild": "rimraf \"*.d.ts\"",
-    "build": "tsc",
+    "prepack": "npm run build && npm run format",
+    "build": "rimraf \"*.d.ts\" && tsc && typescript-coverage-report",
     "format": "remark . -qfo && prettier . -w --loglevel warn && xo --fix",
     "test-api": "node test.js",
-    "test-coverage": "c8 --check-coverage --branches 100 --functions 100 --lines 100 --statements 100 --reporter lcov node test.js && typescript-coverage-report",
+    "test-coverage": "c8 --check-coverage --branches 100 --functions 100 --lines 100 --statements 100 --reporter lcov node test.js",
     "test": "npm run build && npm run format && npm run test-coverage"
   },
   "typeCoverage": {
