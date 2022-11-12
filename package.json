@@ -1,6 +1,6 @@
 {
   "name": "datamap-interface",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Legacy package (use `Map`)",
   "license": "MIT",
   "keywords": [
