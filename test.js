@@ -40,12 +40,14 @@ test('#has(key)', function (t) {
     'should return `false` if an item is in the database'
   )
 
-  // @ts-ignore Check prototype polution.
+  // @ts-expect-error Check prototype polution.
+  // type-coverage:ignore-next-line
   Object.prototype.unicorn = 'mammal'
 
   t.notOk(animals.has('unicorn'), 'should not fail on prototpe extending')
 
-  // @ts-ignore Check prototype polution.
+  // @ts-expect-error Check prototype polution.
+  // type-coverage:ignore-next-line
   delete Object.prototype.unicorn
 
   t.notOk(animals.has('toString'), 'should not fail on native properties (1)')
@@ -123,7 +125,8 @@ test('#add() and #remove()', function (t) {
     'should ignore removing a non-existing item'
   )
 
-  // @ts-ignore Check prototype polution.
+  // @ts-expect-error Check prototype polution.
+  // type-coverage:ignore-next-line
   Object.prototype.platypus = 'mammal'
 
   t.notOk(
