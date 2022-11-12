@@ -1,4 +1,5 @@
-import test from 'tape'
+import assert from 'node:assert/strict'
+import test from 'node:test'
 import {DatamapInterface} from './index.js'
 
 const animals = new DatamapInterface({
@@ -11,30 +12,28 @@ const animals = new DatamapInterface({
 /* eslint-disable no-use-extend-native/no-use-extend-native */
 /* eslint-disable no-extend-native */
 
-test('#get(key)', function (t) {
-  t.equal(
+test('#get(key)', function () {
+  assert.equal(
     animals.get('shark'),
     'fish',
     'should return the value of an item in the database'
   )
 
-  t.equal(
+  assert.equal(
     animals.get('unicorn'),
     null,
     'should return null if am item is not in the database'
   )
-
-  t.end()
 })
 
-test('#has(key)', function (t) {
-  t.equal(
+test('#has(key)', function () {
+  assert.equal(
     animals.has('shark'),
     true,
     'should return `true` if an item is in the database'
   )
 
-  t.equal(
+  assert.equal(
     animals.has('unicorn'),
     false,
     'should return `false` if an item is in the database'
@@ -44,27 +43,28 @@ test('#has(key)', function (t) {
   // type-coverage:ignore-next-line
   Object.prototype.unicorn = 'mammal'
 
-  t.notOk(animals.has('unicorn'), 'should not fail on prototpe extending')
+  assert.ok(!animals.has('unicorn'), 'should not fail on prototpe extending')
 
   // @ts-expect-error Check prototype polution.
   // type-coverage:ignore-next-line
   delete Object.prototype.unicorn
 
-  t.notOk(animals.has('toString'), 'should not fail on native properties (1)')
-  t.notOk(
-    animals.has('constructor'),
+  assert.ok(
+    !animals.has('toString'),
+    'should not fail on native properties (1)'
+  )
+  assert.ok(
+    !animals.has('constructor'),
     'should not fail on native properties (2)'
   )
-  t.notOk(
-    animals.has('hasOwnProperty'),
+  assert.ok(
+    !animals.has('hasOwnProperty'),
     'should not fail on native properties (3)'
   )
-
-  t.end()
 })
 
-test('#all()', function (t) {
-  t.deepEqual(
+test('#all()', function () {
+  assert.deepEqual(
     animals.all(),
     {
       shark: 'fish',
@@ -77,21 +77,23 @@ test('#all()', function (t) {
 
   animals.all().unicorn = 'mammal'
 
-  t.notOk(animals.has('unicorn'), 'should be immutable')
+  assert.ok(!animals.has('unicorn'), 'should be immutable')
 
-  t.deepEqual(
+  assert.deepEqual(
     animals.all(),
     animals.valueOf(),
     'should be aliased as `valueOf`'
   )
 
-  t.deepEqual(animals.all(), animals.toJSON(), 'should be aliased as `toJSON`')
-
-  t.end()
+  assert.deepEqual(
+    animals.all(),
+    animals.toJSON(),
+    'should be aliased as `toJSON`'
+  )
 })
 
-test('#keys()', function (t) {
-  t.deepEqual(
+test('#keys()', function () {
+  assert.deepEqual(
     animals.keys(),
     ['shark', 'tuna', 'colugo', 'human'],
     'should return all keys'
@@ -99,29 +101,35 @@ test('#keys()', function (t) {
 
   animals.keys().push('unicorn')
 
-  t.notOk(animals.has('unicorn'), 'should be immutable')
-
-  t.end()
+  assert.ok(!animals.has('unicorn'), 'should be immutable')
 })
 
-test('#add() and #remove()', function (t) {
-  t.equal(animals.add('unicorn', 'mammal'), animals, '`add` should return self')
-  t.ok(animals.has('unicorn'), 'should add items')
-  t.equal(animals.remove('unicorn'), animals, '`remove` should return self')
-  t.notOk(animals.has('unicorn'), 'should remove items')
+test('#add() and #remove()', function () {
+  assert.equal(
+    animals.add('unicorn', 'mammal'),
+    animals,
+    '`add` should return self'
+  )
+  assert.ok(animals.has('unicorn'), 'should add items')
+  assert.equal(
+    animals.remove('unicorn'),
+    animals,
+    '`remove` should return self'
+  )
+  assert.ok(!animals.has('unicorn'), 'should remove items')
 
   animals.add({unicorn: 'mammal', doge: 'mammal'})
 
-  t.ok(animals.has('unicorn'), 'should add multiple items (1)')
-  t.ok(animals.has('doge'), 'should add multiple items (2)')
+  assert.ok(animals.has('unicorn'), 'should add multiple items (1)')
+  assert.ok(animals.has('doge'), 'should add multiple items (2)')
 
   animals.remove(['unicorn', 'doge'])
 
-  t.notOk(animals.has('unicorn'), 'should remove multiple items (1)')
-  t.notOk(animals.has('doge'), 'should remove multiple items (2)')
+  assert.ok(!animals.has('unicorn'), 'should remove multiple items (1)')
+  assert.ok(!animals.has('doge'), 'should remove multiple items (2)')
 
-  t.notOk(
-    animals.remove('unicorn').has('unicorn'),
+  assert.ok(
+    !animals.remove('unicorn').has('unicorn'),
     'should ignore removing a non-existing item'
   )
 
@@ -129,12 +137,10 @@ test('#add() and #remove()', function (t) {
   // type-coverage:ignore-next-line
   Object.prototype.platypus = 'mammal'
 
-  t.notOk(
-    animals.add({unicorn: 'mammal'}).has('platypus'),
+  assert.ok(
+    !animals.add({unicorn: 'mammal'}).has('platypus'),
     'should not fail on prototpe extending'
   )
-
-  t.end()
 })
 
 /* eslint-enable no-use-extend-native/no-use-extend-native */
