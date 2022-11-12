@@ -1,4 +1,4 @@
-var own = {}.hasOwnProperty
+const own = {}.hasOwnProperty
 
 /**
  * A basic interface for a map.
@@ -30,7 +30,7 @@ export class DatamapInterface {
    */
   add(values, value) {
     /** @type {string} */
-    var key
+    let key
 
     if (typeof values === 'string') {
       this.map[values] = value
@@ -53,7 +53,7 @@ export class DatamapInterface {
    * @return {this}
    */
   remove(keys) {
-    var index = -1
+    let index = -1
 
     if (typeof keys === 'string') {
       this.map[keys] = undefined
@@ -73,9 +73,9 @@ export class DatamapInterface {
    */
   all() {
     /** @type {Record.<string, Item>} */
-    var values = {}
+    const values = {}
     /** @type {string} */
-    var key
+    let key
 
     for (key in this.map) {
       if (own.call(this.map, key) && this.map[key] !== undefined) {
@@ -143,9 +143,9 @@ export class DatamapInterface {
    */
   keys() {
     /** @type {string[]} */
-    var result = []
+    const result = []
     /** @type {string} */
-    var key
+    let key
 
     for (key in this.map) {
       if (own.call(this.map, key) && this.map[key] !== undefined) {

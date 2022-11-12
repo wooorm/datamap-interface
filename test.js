@@ -1,7 +1,7 @@
 import test from 'tape'
 import {DatamapInterface} from './index.js'
 
-var animals = new DatamapInterface({
+const animals = new DatamapInterface({
   shark: 'fish',
   tuna: 'fish',
   colugo: 'mammal',
