@@ -1,7 +1,7 @@
 {
   "name": "datamap-interface",
   "version": "2.0.0",
-  "description": "Simple interface for a map functioning as a database",
+  "description": "Legacy package (use `Map`)",
   "license": "MIT",
   "keywords": [
     "data",
