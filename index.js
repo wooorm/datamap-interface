@@ -10,10 +10,10 @@ export class DatamapInterface {
    * Create a new data map.
    * Values are passed to `#add()`.
    *
-   * @param {Record.<string, Item>} [values]
+   * @param {Record<string, Item>|undefined} [values]
    */
   constructor(values) {
-    /** @type Record.<string, Item> */
+    /** @type {Record<string, Item|undefined>} */
     this.map = {}
     this.add(values)
   }
@@ -24,8 +24,8 @@ export class DatamapInterface {
    * first parameter as a key.
    * Otherwise, every value in the first argument is added.
    *
-   * @param {string | Record.<string, Item>} values
-   * @param {Item} [value]
+   * @param {string|Record<string, Item>|undefined} [values]
+   * @param {Item|undefined} [value]
    * @returns {this}
    */
   add(values, value) {
@@ -34,7 +34,7 @@ export class DatamapInterface {
 
     if (typeof values === 'string') {
       this.map[values] = value
-    } else {
+    } else if (values) {
       for (key in values) {
         if (own.call(values, key) && values[key] !== undefined) {
           this.map[key] = values[key]
@@ -49,7 +49,8 @@ export class DatamapInterface {
    * Remove things from map by key.
    * One or more keys can be given.
    *
-   * @param {string|string[]} keys One or more keys
+   * @param {string|Array<string>} keys
+   *   One or more keys.
    * @return {this}
    */
   remove(keys) {
@@ -69,17 +70,20 @@ export class DatamapInterface {
   /**
    * Get values in map.
    *
-   * @returns {Record.<string, Item>} Values
+   * @returns {Record<string, Item>} Values
    */
   all() {
-    /** @type {Record.<string, Item>} */
+    /** @type {Record<string, Item>} */
     const values = {}
     /** @type {string} */
     let key
 
     for (key in this.map) {
-      if (own.call(this.map, key) && this.map[key] !== undefined) {
-        values[key] = this.map[key]
+      if (own.call(this.map, key)) {
+        const value = this.map[key]
+        if (value !== undefined) {
+          values[key] = value
+        }
       }
     }
 
@@ -89,7 +93,7 @@ export class DatamapInterface {
   /**
    * Get values in map.
    *
-   * @returns {Record.<string, Item>} Values
+   * @returns {Record<string, Item>} Values
    */
   valueOf() {
     return this.all()
@@ -98,7 +102,7 @@ export class DatamapInterface {
   /**
    * Get values in map.
    *
-   * @returns {Record.<string, Item>} Values
+   * @returns {Record<string, Item>} Values
    */
   toJSON() {
     return this.all()
@@ -108,12 +112,17 @@ export class DatamapInterface {
    * Get a value from map by key.
    *
    * @param {string} key
-   * @returns {Item?} Value
+   * @returns {Item|null} Value
    */
   get(key) {
-    return own.call(this.map, key) && this.map[key] !== undefined
-      ? this.map[key]
-      : null
+    if (own.call(this.map, key)) {
+      const value = this.map[key]
+      if (value !== undefined) {
+        return value
+      }
+    }
+
+    return null
   }
 
   /**
